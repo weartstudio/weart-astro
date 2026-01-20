@@ -1,12 +1,86 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Menu from "../components/Menu.astro";
+import Hero from "../components/Hero.astro";
+import SuccessStories from "../components/SuccessStories.astro";
+import Title from "../components/common/Title.astro";
+import CarouselTestimonial from "../components/CarouselTestimonial.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const translations = {
+	"home.testimonials.subtitle": "vélemények",
+	"home.testimonials.title": "Akik már megbíztak bennünk",
+	"home.testimonials.description":
+		"Quisque sit amet laoreet ante. Nulla porttitor nisl a vestibulum mollis. Sed malesuada, lacus vitae lobortis convallis.",
+};
+
+const t = (key) => translations[key] ?? key;
+
+const testimonials = [
+	{
+		name: "Nagy Balazs",
+		alt: "Kereskedelmi vezeto",
+		content: "Gyors, preciz es atgondolt megoldasokat kaptunk, a csapat vegig elerheto volt.",
+	},
+	{
+		name: "Horvath Eszter",
+		alt: "Marketing menedzser",
+		content: "A vizualis irany es a fejlesztes is magas szinvonalon keszult el, ajanlom oket.",
+	},
+	{
+		name: "Toth Adam",
+		alt: "Alapito",
+		content: "A folyamat atlathato volt, a hataridok tarthatoak, az eredmeny pedig hozta az elvartat.",
+	},
+];
 ---
 
 <Layout>
-	<Welcome />
-	<h1 class="text-4xl">aaaa</h1>
+	<header class="animated-dots-bg pb-20">
+		<div class="dots-layer-1"></div>
+		<div class="relative z-10">
+			<Menu />
+			<Hero />
+			<SuccessStories />
+		</div>
+	</header>
+	<section class="container mx-auto py-20">
+		<div class="container mx-auto pb-10">
+			<Title subtitle={t("home.testimonials.subtitle")} title={t("home.testimonials.title")} class="text-dark">
+				{t("home.testimonials.description")}
+			</Title>
+		</div>
+		<CarouselTestimonial testimonials={testimonials} />
+	</section>
+	<section class="container mx-auto py-20 grid lg:grid-cols-3 grid-cols-1 gap-20">
+		<div class="bg-secondary rounded-3xl aspect-square relative flex flex-col w-full">
+			<div class="rounded-full w-1/2 absolute -left-5 -top-5">
+				<div class="rounded-full bg-primary aspect-square w-full relative z-10"></div>
+				<div class="rounded-full bg-dark aspect-square w-full absolute -top-7 -left-7"></div>
+				<div class="border-dashed border border-dark rounded-full aspect-square w-full absolute -top-5 left-2"></div>
+			</div>
+
+			<div class="ml-auto mr-10 mt-10 mb-auto">
+				<h3 class="text-2xl font-semibold">Egyed Balazs</h3>
+				<h4 class="text-sm">Web developer</h4>
+			</div>
+			<div class="mr-auto ml-10 mt-auto mb-10">
+				<h3 class="text-2xl font-semibold">Agoston Fanni</h3>
+				<h4 class="text-sm">Projektmanager</h4>
+			</div>
+
+			<div class="rounded-full w-1/2 absolute -right-5 -bottom-5">
+				<div class="rounded-full bg-primary aspect-square w-full relative z-10"></div>
+				<div class="rounded-full bg-dark aspect-square w-full absolute -bottom-7 -right-7"></div>
+				<div class="border-dashed border border-dark rounded-full aspect-square w-full absolute -bottom-5 right-2"></div>
+			</div>
+		</div>
+		<div class="lg:col-span-2">
+			<Title subtitle="Bemutatkozas" title="Kik vagyunk" class="text-dark">
+				Arra torekszunk, hogy a design es a technologia egyutt szolgala a vallalkozasod celjait.
+			</Title>
+			<div class="grid md:grid-cols-2 gap-5">
+				<div></div>
+			</div>
+		</div>
+	</section>
 </Layout>

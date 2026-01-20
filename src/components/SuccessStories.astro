@@ -1,0 +1,32 @@
+---
+import Title from "./common/Title.astro";
+import SuccessStoriesItem from "./SuccessStoriesItem.astro";
+
+const items = Array.from({ length: 4 }, (_, index) => ({
+	className: index % 2 !== 0 ? "mt-0 md:-mt-20" : "",
+	image: "/images/success-stories/fitness-weboldal.jpg",
+	link: "https://weart.hu/portfolio/joker-ruhazati-webshop/",
+	subtitle: "Joker ruhazati webaruhaz",
+	description:
+		"Egyedi fejlesztesu, gyors es konnyen kezelheto webaruhaz, amely novelte a ceg online jelenletet es ertekesiteseit.",
+}));
+---
+
+<div class="container mx-auto px-5 ">
+	<Title title="Sikeres tortenetek" subtitle="Kiemelt munkaink">
+		Az elmult evek soran sok kulonfele problemaval talalkoztunk, es sok vallalkozassal volt szerencsenk egyutt dolgozni.
+	</Title>
+	<div class="mt-20 grid gap-20 md:grid-cols-2 md:items-start">
+		{items.map((item) => (
+			<SuccessStoriesItem class={item.className} image={item.image} link={item.link} subtitle={item.subtitle}>
+				{item.description}
+			</SuccessStoriesItem>
+		))}
+	</div>
+	<div class="mt-20 flex justify-center">
+		<a href="/portfolio" class="text-white font-normal">
+			<span class="border-b border-primary pb-0.5">Meg tobb atadott weboldal</span>
+			<i class="bi bi-arrow-right inline-block align-middle ml-2 text-lg"></i>
+		</a>
+	</div>
+</div>

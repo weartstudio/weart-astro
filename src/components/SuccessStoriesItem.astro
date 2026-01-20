@@ -1,0 +1,11 @@
+---
+const { link, image, subtitle, className, class: classProp } = Astro.props;
+const mergedClass = className || classProp || "";
+const imageStyle = image ? `background-image: url('${image}')` : undefined;
+---
+
+<a href={link} class={`group flex flex-col ${mergedClass}`}>
+	<div style={imageStyle} class="aspect-video mb-4 shadow-lg rounded-lg overflow-hidden bg-primary"></div>
+	<h3 class="text-primary uppercase font-semibold tracking-wider text-sm mb-4">{subtitle}</h3>
+	<h2 class="text-secondary font-bold text-2xl leading-tight"><slot /></h2>
+</a>

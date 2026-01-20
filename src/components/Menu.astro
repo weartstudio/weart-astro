@@ -1,0 +1,35 @@
+---
+import Button from "./common/Button.astro";
+import logoDark from "../assets/img/logo-dark.png";
+
+const {
+	items = [
+		{ href: "/about", label: "Rólunk" },
+		{ href: "/portfolio", label: "Munkáink" },
+		{ href: "/services", label: "Szolgáltatások" },
+		{ href: "/posts", label: "Blog" },
+	],
+	ctaLabel = "Beszélgessünk",
+	logoAlt = "Weart.hu",
+} = Astro.props;
+---
+
+<nav>
+	<div class="container mx-auto px-5 py-6 flex items-center justify-between">
+		<a href="/">
+			<img src={logoDark.src} width="109" height="57" alt={logoAlt} />
+		</a>
+		<div class="lg:block hidden">
+			<ul class="flex space-x-6 text-light">
+				{items.map((item) => (
+					<li>
+						<a href={item.href} class="hover:text-primary">
+							{item.label}
+						</a>
+					</li>
+				))}
+			</ul>
+		</div>
+		<Button link="/contact">{ctaLabel}</Button>
+	</div>
+</nav>

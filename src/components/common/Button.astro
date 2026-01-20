@@ -1,0 +1,9 @@
+---
+const { link, className, class: classProp } = Astro.props;
+const mergedClass = className || classProp || "";
+---
+
+<a href={link} class={`py-3 pl-8 pr-7 inline-flex bg-primary hover:bg-secondary font-semibold rounded text-dark ${mergedClass}`}>
+	<slot />
+	<i class="bi bi-arrow-right ml-2"></i>
+</a>

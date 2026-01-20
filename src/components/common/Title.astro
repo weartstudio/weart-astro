@@ -1,0 +1,10 @@
+---
+const { title, subtitle, class: classProp, className } = Astro.props;
+const mergedClass = classProp || className || "text-secondary";
+---
+
+<div class={mergedClass}>
+	<h2 class="uppercase font-medium tracking-wider text-primary mb-4">{subtitle}</h2>
+	<h1 class="font-bold text-4xl leading-tight mb-4">{title}</h1>
+	{Astro.slots.default ? <p class="max-w-116"><slot /></p> : null}
+</div>

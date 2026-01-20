@@ -1,0 +1,70 @@
+---
+const { testimonials = [] } = Astro.props;
+const initialsFromName = (name) => name.split(" ").map((part) => part[0]).join("");
+---
+
+<div class="relative" data-carousel-root>
+	<div class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6" data-carousel-track>
+		{testimonials.map((testimonial) => (
+			<article class="p-0.75 h-full min-w-[min(28rem,85vw)] snap-start">
+				<div class="px-10 py-10 bg-white shadow-sm p-4 rounded-lg h-full">
+					<p class="fw-semibold text-dark text-[22px] pb-10 leading-normal">{testimonial.content}</p>
+					<div class="flex gap-4">
+						<div class="rounded-full w-14 h-14 flex items-center justify-center bg-dark text-secondary">
+							{initialsFromName(testimonial.name)}
+						</div>
+						<p>
+							<strong>{testimonial.name}</strong>
+							<br />
+							{testimonial.alt}
+						</p>
+					</div>
+				</div>
+			</article>
+		))}
+	</div>
+
+	<div class="flex items-center gap-6 mt-8">
+		<button
+			class="w-12 h-12 rounded-full bg-[#A8D5D8] hover:bg-[#8BC5C9] flex items-center justify-center transition-colors"
+			type="button"
+			data-carousel-prev
+			aria-label="Previous testimonials"
+		>
+			<i class="bi bi-arrow-left text-dark text-xl"></i>
+		</button>
+
+		<div class="mx-auto">
+			<div class="flex gap-2"></div>
+		</div>
+
+		<button
+			class="w-12 h-12 rounded-full bg-[#A8D5D8] hover:bg-[#8BC5C9] flex items-center justify-center transition-colors"
+			type="button"
+			data-carousel-next
+			aria-label="Next testimonials"
+		>
+			<i class="bi bi-arrow-right text-dark text-xl"></i>
+		</button>
+	</div>
+</div>
+
+<script is:inline>
+	document.querySelectorAll("[data-carousel-root]").forEach((root) => {
+		const track = root.querySelector("[data-carousel-track]");
+		const prev = root.querySelector("[data-carousel-prev]");
+		const next = root.querySelector("[data-carousel-next]");
+
+		if (!track || !prev || !next) return;
+
+		const getOffset = () => Math.round(track.clientWidth * 0.85);
+
+		prev.addEventListener("click", () => {
+			track.scrollBy({ left: -getOffset(), behavior: "smooth" });
+		});
+
+		next.addEventListener("click", () => {
+			track.scrollBy({ left: getOffset(), behavior: "smooth" });
+		});
+	});
+</script>
